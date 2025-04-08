@@ -1,0 +1,15 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "Segoe",
+    "Consolas",
+    "tooltiptext",
+    "notnull",
+    "dflt"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**"
+  ]
+}

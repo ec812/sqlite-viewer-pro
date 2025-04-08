@@ -1,26 +1,56 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { DatabaseProvider } from './providers/databaseProvider';
+import { DatabaseViewerPanel } from './panels/databaseViewerPanel';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+    console.log('SQLite Viewer Pro is now active!');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "sqlite-viewer" is now active!');
+    // Initialize database provider
+    const databaseProvider = new DatabaseProvider();
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('sqlite-viewer.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from sqlite-viewer!');
-	});
+    // Register commands
+    let openDatabaseCmd = vscode.commands.registerCommand('sqlite-viewer-pro.openDatabase', async (fileUri?: vscode.Uri) => {
+        try {
+            // If no URI provided (command palette activation), show file picker
+            if (!fileUri) {
+                const files = await vscode.window.showOpenDialog({
+                    canSelectFiles: true,
+                    canSelectFolders: false,
+                    canSelectMany: false,
+                    filters: {
+                        'SQLite Databases': ['db', 'sqlite', 'sqlite3']
+                    },
+                    title: 'Open SQLite Database'
+                });
+                
+                if (!files || files.length === 0) {
+                    return;
+                }
+                
+                fileUri = files[0];
+            }
+            
+            // Open the database viewer
+            DatabaseViewerPanel.createOrShow(context, fileUri, databaseProvider);
+        } catch (error) {
+            vscode.window.showErrorMessage(`Failed to open SQLite database: ${error instanceof Error ? error.message : String(error)}`);
+        }
+    });
 
-	context.subscriptions.push(disposable);
+    let refreshConnectionCmd = vscode.commands.registerCommand('sqlite-viewer-pro.refreshConnection', () => {
+        if (DatabaseViewerPanel.currentPanel) {
+            DatabaseViewerPanel.currentPanel.refresh();
+        } else {
+            vscode.window.showInformationMessage('No active SQLite database connection to refresh.');
+        }
+    });
+
+    // Add to subscriptions
+    context.subscriptions.push(openDatabaseCmd);
+    context.subscriptions.push(refreshConnectionCmd);
+    context.subscriptions.push(databaseProvider);
 }
 
-// This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+    // Clean up resources
+}
