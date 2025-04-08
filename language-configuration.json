@@ -1,0 +1,4 @@
+{
+  "fileTypes": [".db", ".sqlite", ".sqlite3"],
+  "firstLine": "^SQLite format 3"
+}

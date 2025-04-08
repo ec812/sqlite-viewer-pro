@@ -19,7 +19,7 @@ Install this extension from the VS Code Marketplace or by searching for "SQLite 
 
 ## Requirements
 
-- Visual Studio Code version 1.60.0 or higher
+- Visual Studio Code version 1.75.0 or higher
 - SQLite database files (.db, .sqlite, or .sqlite3)
 
 ## Usage

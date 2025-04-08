@@ -4,6 +4,7 @@
   "description": "Professional SQLite database viewer for VS Code",
   "version": "0.1.0",
   "publisher": "YourPublisherName", 
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/YourUsername/sqlite-viewer-pro"
@@ -22,10 +23,36 @@
     "sql"
   ],
   "activationEvents": [
-    "onCommand:sqlite-viewer-pro.openDatabase"
+
   ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
   "main": "./dist/extension.js",
   "contributes": {
+    "customEditors": [
+      {
+        "viewType": "sqlite-viewer-pro.editor",
+        "displayName": "SQLite Viewer Pro",
+        "selector": [
+          { 
+            "filenamePattern": "*.db",
+            "scheme": "file"
+          },
+          { 
+            "filenamePattern": "*.sqlite",
+            "scheme": "file"
+          },
+          { 
+            "filenamePattern": "*.sqlite3",
+            "scheme": "file"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
     "commands": [
       {
         "command": "sqlite-viewer-pro.openDatabase",

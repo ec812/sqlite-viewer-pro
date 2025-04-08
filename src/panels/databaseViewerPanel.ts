@@ -5,6 +5,7 @@ import { DatabaseProvider, QueryResult } from '../providers/databaseProvider';
 
 export class DatabaseViewerPanel {
     public static currentPanel: DatabaseViewerPanel | undefined;
+    
 
     private static readonly viewType = 'sqliteViewerPro';
     private readonly _panel: vscode.WebviewPanel;
@@ -12,6 +13,13 @@ export class DatabaseViewerPanel {
     private readonly _dbPath: string;
     private readonly _dbProvider: DatabaseProvider;
     private _disposables: vscode.Disposable[] = [];
+    
+    /**
+     * Get the database path for this panel
+     */
+    public getDbPath(): string {
+        return this._dbPath;
+    }
 
     public static createOrShow(context: vscode.ExtensionContext, dbUri: vscode.Uri, dbProvider: DatabaseProvider) {
         const dbPath = dbUri.fsPath;
@@ -204,9 +212,26 @@ export class DatabaseViewerPanel {
     }
 
     private _update() {
-        const webview = this._panel.webview;
-        this._panel.title = `SQLite: ${path.basename(this._dbPath)}`;
-        webview.html = this._getHtmlForWebview(webview);
+        console.log(`Updating panel for database: ${this._dbPath}`);
+        this._panel.webview.html = this._getHtmlForWebview(this._panel.webview);
+        
+        // Ensure tables are loaded automatically after the webview is initialized
+        setTimeout(() => {
+            console.log(`Loading initial data for database: ${this._dbPath}`);
+            this._loadInitialData();
+        }, 1000); // Increased delay to ensure webview is ready
+    }
+
+    private _loadInitialData() {
+        // Load tables and database info automatically
+        console.log('Sending getTables message to webview');
+        this._panel.webview.postMessage({ command: 'getTables' });
+        
+        console.log('Sending getDatabaseInfo message to webview');
+        this._panel.webview.postMessage({ command: 'getDatabaseInfo' });
+        
+        // Log a confirmation message
+        console.log('Initial data loading messages sent');
     }
 
     private _getHtmlForWebview(webview: vscode.Webview) {
