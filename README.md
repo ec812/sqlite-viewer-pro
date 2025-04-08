@@ -1,71 +1,82 @@
-# sqlite-viewer README
+# SQLite Viewer Pro
 
-This is the README for your extension "sqlite-viewer". After writing up a brief description, we recommend including the following sections.
+![SQLite Viewer Pro](https://img.shields.io/badge/SQLite-Viewer%20Pro-blue)
+
+A professional SQLite database viewer extension for Visual Studio Code. Easily browse, query, and manage your SQLite databases without leaving your editor.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Database Explorer**: Browse tables, views, and their structure in a clean interface
+- **SQL Query Editor**: Write and execute custom SQL queries with syntax highlighting
+- **Query Results**: View query results in a formatted table with pagination
+- **Table Data**: Browse table data with sorting and filtering capabilities
+- **Schema Information**: Examine table structures, indexes, and foreign key constraints
+- **SQL Formatting**: Automatically format your SQL queries for better readability
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Install this extension from the VS Code Marketplace or by searching for "SQLite Viewer Pro" in the Extensions view (Ctrl+Shift+X).
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Visual Studio Code version 1.60.0 or higher
+- SQLite database files (.db, .sqlite, or .sqlite3)
+
+## Usage
+
+### Opening a Database
+
+1. Right-click on a SQLite database file (.db, .sqlite, or .sqlite3) in the Explorer
+2. Select "SQLite Viewer Pro: Open Database" from the context menu
+3. The database viewer will open in a new tab
+
+### Browsing Tables
+
+1. The left sidebar shows all tables and views in your database
+2. Click on a table name to view its data
+3. Use the tabs at the top to switch between Data, Structure, Indexes, and Constraints views
+
+### Running SQL Queries
+
+1. Click on the "SQL Query" tab
+2. Enter your SQL query in the editor
+3. Click the "Run" button or press F5 to execute the query
+4. Results will appear in the table below
+5. Use the "Format" button to automatically format your SQL query
+
+### Refreshing Data
+
+If you make changes to your database outside of the extension, click the "Refresh" button to update the view.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- `sqliteViewerPro.limitRows`: Maximum number of rows to fetch per query (default: 1000)
+- `sqliteViewerPro.darkTheme`: Use dark theme for SQLite viewer (default: true)
 
-## Known Issues
+## Tips and Tricks
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- Double-click on a table name to quickly view its data
+- Use the search box in the results table to filter data
+- Right-click on column headers to sort data
+- The status bar shows the number of rows and query execution time
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.1.0
 
-### 1.0.0
+- Initial release of SQLite Viewer Pro
+- Basic table browsing and data viewing
+- SQL query editor with syntax highlighting
+- Table structure, indexes, and constraints views
+- Dark and light theme support
 
-Initial release of ...
+## Feedback and Contributions
 
-### 1.0.1
+If you find any bugs or have feature requests, please open an issue on the [GitHub repository](https://github.com/YourUsername/sqlite-viewer-pro).
 
-Fixed issue #.
+## License
 
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
+This extension is licensed under the MIT License.
 **Enjoy!**
