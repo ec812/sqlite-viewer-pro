@@ -21,6 +21,9 @@
     "viewer",
     "sql"
   ],
+  "activationEvents": [
+    "onCommand:sqlite-viewer-pro.openDatabase"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
